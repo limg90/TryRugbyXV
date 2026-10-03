@@ -36,9 +36,13 @@ src/
 
 ## Points d'extension pour la suite
 
-- **Moteur d'animation et combinaisons** : ajouter des scénarios dans `data/scenarios.js`
-  (mêlée, touche, ruck, défense glissée, adversaires), étendre `useScenario` si besoin
-  (trajectoires courbes, passes en vol, deuxième équipe).
+- **Combinaisons** (fait) : `data/combinaisons.js` (phases de jeu et 15 combinaisons, avec explication
+  et exercice), `data/formations.js` (placements de départ, adversaires inclus), vues `views/Bibliotheque.jsx`,
+  `views/CombinaisonDetail.jsx` et `views/Editeur.jsx` (routes `#combinaisons`, `#combinaisons-croisee`,
+  `#combinaisons-editeur`). Le moteur gère les adversaires (`opponents`), le ballon porté par un adversaire
+  (`ball: { carrier, team: 'adv' }`), le saut en touche (`lifted`) et trace les trajectoires (`Trails`).
+  `Pitch` accepte `zoom: { x: [a, b], y: [c, d] }` pour la vue rapprochée. Les combinaisons de l'éditeur
+  sont enregistrées dans le stockage local (`rugbyapp.combinaisons`).
 - **Règles, quiz et progression** : `PositionQuiz` est un QCM simple à remplacer par le moteur de quiz ;
   le niveau (`lib/AppContext.jsx`) accueillera badges et scores.
 - **Assistant IA** : peut s'appuyer sur `POSITIONS` et `SCENARIOS` pour générer explication, animation et quiz.

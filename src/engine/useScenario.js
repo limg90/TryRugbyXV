@@ -1,17 +1,68 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-// Lecteur de scénario : calcule l'image courante (positions, ballon, légende)
+// Lecteur de scénario : calcule l'image courante (positions, adversaires, ballon, légende)
 // et avance d'étape en étape selon la vitesse choisie.
-// Le rendu (Pitch, PlayerToken, Ball) anime la transition avec Framer Motion.
+// Le rendu (Pitch, PlayerToken, Ball, Trails) anime la transition avec Framer Motion.
+//
+// Champs d'étape (voir data/scenarios.js) : duration, caption, players, ball, highlight,
+// et en plus pour le moteur d'animation :
+//   - opponents : positions des adversaires { numero: [x, y] }, cumulées comme players
+//   - ball      : { carrier, team: 'adv' } quand un adversaire porte le ballon, { at, kick: true } pour un coup de pied
+//   - lifted    : numéros de nos joueurs soulevés en touche pendant l'étape
+
+const MOVE_MIN = 0.8 // en mètres : en dessous, on ne trace pas de trajectoire
+
+// Position du ballon dans une image (décalé sur le côté du porteur, comme Ball.jsx).
+export function ballPosition(ball, positions, opponents) {
+  if (ball?.carrier != null) {
+    const map = ball.team === 'adv' ? opponents : positions
+    const p = map?.[ball.carrier]
+    return p ? [p[0] + 1.4, p[1] - 1.6] : null
+  }
+  return ball?.at ?? null
+}
+
+const sameBall = (a, b) =>
+  a?.carrier != null ? a.carrier === b?.carrier && (a.team ?? null) === (b?.team ?? null) : !!a?.at && !!b?.at && a.at[0] === b.at[0] && a.at[1] === b.at[1]
 
 export function buildFrames(scenario) {
   const frames = []
   let positions = {}
+  let opponents = {}
   let ball = { carrier: null }
   for (const step of scenario.steps) {
+    const prev = frames[frames.length - 1]
     positions = { ...positions, ...step.players }
-    ball = step.ball ?? ball
-    frames.push({ positions, ball, caption: step.caption, duration: step.duration, highlight: step.highlight ?? [] })
+    opponents = { ...opponents, ...step.opponents }
+    const nextBall = step.ball ?? ball
+    // Trajectoires de l'étape : course des joueurs qui ont bougé, passe ou coup de pied.
+    const moves = []
+    let pass = null
+    if (prev) {
+      for (const [team, now, before] of [['nous', positions, prev.positions], ['adv', opponents, prev.opponents]]) {
+        for (const [n, to] of Object.entries(now)) {
+          const from = before[n]
+          if (from && Math.hypot(to[0] - from[0], to[1] - from[1]) > MOVE_MIN) moves.push({ id: `${team}-${n}`, team, from, to })
+        }
+      }
+      if (!sameBall(nextBall, ball)) {
+        const from = ballPosition(ball, prev.positions, prev.opponents)
+        const to = ballPosition(nextBall, positions, opponents)
+        if (from && to) pass = { from, to, kind: nextBall.kick ? 'pied' : 'passe' }
+      }
+    }
+    ball = nextBall
+    frames.push({
+      positions,
+      opponents,
+      ball,
+      caption: step.caption,
+      duration: step.duration,
+      highlight: step.highlight ?? [],
+      lifted: step.lifted ?? [],
+      moves,
+      pass,
+    })
   }
   return frames
 }
@@ -30,6 +81,7 @@ export function useScenario(scenario, { speed = 1 } = {}) {
     setPlaying(false)
     index = 0
   }
+  index = Math.min(index, frames.length - 1)
 
   const isPlaying = playing && index < frames.length - 1
 
@@ -57,6 +109,7 @@ export function useScenario(scenario, { speed = 1 } = {}) {
 
   const frame = frames[index]
   return {
+    frames,
     frame,
     index,
     count: frames.length,

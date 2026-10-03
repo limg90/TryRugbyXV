@@ -4,6 +4,7 @@ import { useRoute, href } from './lib/router.js'
 import TerrainView from './views/TerrainView.jsx'
 import PostesView from './views/PostesView.jsx'
 import PosteDetail from './views/PosteDetail.jsx'
+import CombinaisonsView from './views/CombinaisonsView.jsx'
 import ComingSoon, { SOON_MODULES } from './views/ComingSoon.jsx'
 
 const NAV = [
@@ -42,6 +43,7 @@ function Shell() {
   let view
   if (route.name === 'postes') view = <PostesView />
   else if (route.name === 'poste') view = <PosteDetail numero={route.param} />
+  else if (route.name === 'combinaisons') view = <CombinaisonsView param={route.param} />
   else if (SOON_MODULES.includes(route.name)) view = <ComingSoon name={route.name} />
   else view = <TerrainView />
 

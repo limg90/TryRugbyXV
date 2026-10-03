@@ -1,8 +1,4 @@
 const MODULES = {
-  combinaisons: {
-    titre: 'Combinaisons',
-    texte: 'La bibliothèque de combinaisons (avants, trois-quarts, sorties de mêlée et de touche) avec vitesse réglable, ainsi que l’éditeur pour dessiner et rejouer vos propres combinaisons.',
-  },
   regles: {
     titre: 'Règles',
     texte: 'Les modules Débutant et Expert : chaque règle avec une explication simple, un schéma animé, une vidéo et un quiz.',

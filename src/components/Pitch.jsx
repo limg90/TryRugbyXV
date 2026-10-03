@@ -16,6 +16,13 @@ export function makeProject(vertical) {
     : (x, y) => [x + IN_GOAL + PAD, y + PAD]
 }
 
+// Inverse de makeProject : coordonnées SVG → mètres sur le terrain (éditeur).
+export function makeUnproject(vertical) {
+  return vertical
+    ? (sx, sy) => [100 + IN_GOAL + PAD - sy, sx - PAD]
+    : (sx, sy) => [sx - IN_GOAL - PAD, sy - PAD]
+}
+
 function Dashed({ x1, y1, x2, y2, dash = '1.6 1.6' }) {
   return <line className="pitch-line" x1={x1} y1={y1} x2={x2} y2={y2} strokeDasharray={dash} />
 }
@@ -67,19 +74,25 @@ const LABELS = [
 ]
 
 // crop : [xmin, xmax] en mètres pour n'afficher qu'une partie du terrain (orientation horizontale).
-export default function Pitch({ vertical = false, crop = null, children, className = '', ariaLabel = 'Terrain de rugby' }) {
+// zoom : { x: [xmin, xmax], y: [ymin, ymax] } en mètres, vue rapprochée dans les deux orientations.
+export default function Pitch({ vertical = false, crop = null, zoom = null, svgRef, children, className = '', ariaLabel = 'Terrain de rugby', ...rest }) {
   const project = makeProject(vertical)
   const w = vertical ? 70 + 2 * PAD : 100 + 2 * IN_GOAL + 2 * PAD
   const h = vertical ? 100 + 2 * IN_GOAL + 2 * PAD : 70 + 2 * PAD
   const groupTransform = vertical
     ? `translate(${PAD} ${100 + IN_GOAL + PAD}) rotate(-90)`
     : `translate(${IN_GOAL + PAD} ${PAD})`
-  const viewBox = crop && !vertical
+  let viewBox = crop && !vertical
     ? `${crop[0] + IN_GOAL + PAD} 0 ${crop[1] - crop[0]} ${h}`
     : `0 0 ${w} ${h}`
+  if (zoom) {
+    const [ax, ay] = project(zoom.x[0], zoom.y[0])
+    const [bx, by] = project(zoom.x[1], zoom.y[1])
+    viewBox = `${Math.min(ax, bx)} ${Math.min(ay, by)} ${Math.abs(bx - ax)} ${Math.abs(by - ay)}`
+  }
   return (
     <ProjectContext.Provider value={project}>
-      <svg className={`pitch ${className}`} viewBox={viewBox} role="group" aria-label={ariaLabel}>
+      <svg ref={svgRef} className={`pitch ${className}`} viewBox={viewBox} role="group" aria-label={ariaLabel} {...rest}>
         <rect x={0} y={0} width={w} height={h} className="pitch-surround" />
         <g transform={groupTransform}>
           <PitchMarkings />
