@@ -15,6 +15,7 @@ const NAV = [
   { name: 'postes', label: 'Postes', icon: 'M8 4l4 2 4-2 4 3-2 3-2-1v11H8V9l-2 1-2-3z' },
   { name: 'combinaisons', label: 'Combinaisons', icon: 'M5 18c3-8 7-1 14-12 M15 6h4v4' },
   { name: 'regles', label: 'Règles', icon: 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6 M9 18h4' },
+  { name: 'arbitre', label: 'Arbitre', to: href('regles', 'signes'), icon: 'M7 14a5 5 0 1 0 5-5H8a2 2 0 0 0-2 2v3z M12 9V6h6 M18 4v4' },
   { name: 'quiz', label: 'Quiz', icon: 'M9 9a3 3 0 1 1 4 2.8c-.7.3-1 .9-1 1.6V15 M12 19h.01' },
   { name: 'assistant', label: 'Assistant', icon: 'M4 5h16v11H9l-5 4z' },
 ]
@@ -41,7 +42,9 @@ function LevelPicker() {
 
 function Shell() {
   const route = useRoute()
-  const active = route.name === 'poste' ? 'postes' : route.name
+  const active = route.name === 'poste' ? 'postes'
+    : route.name === 'regles' && route.param === 'signes' ? 'arbitre'
+    : route.name
 
   let view
   if (route.name === 'postes') view = <PostesView />
@@ -67,7 +70,7 @@ function Shell() {
         </a>
         <nav className="nav" aria-label="Modules">
           {NAV.map((n) => (
-            <a key={n.name} href={href(n.name)} className={active === n.name ? 'is-active' : ''} aria-current={active === n.name ? 'page' : undefined}>
+            <a key={n.name} href={n.to ?? href(n.name)} className={active === n.name ? 'is-active' : ''} aria-current={active === n.name ? 'page' : undefined}>
               <Icon d={n.icon} />
               <span>{n.label}</span>
             </a>
