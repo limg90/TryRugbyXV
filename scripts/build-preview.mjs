@@ -10,7 +10,8 @@ const css = assets.filter((f) => f.endsWith('.css'))
 if (js.length !== 1) throw new Error(`Un seul bundle JS attendu, trouvé : ${js}`)
 const read = (f) => readFileSync(`dist-preview/assets/${f}`, 'utf8')
 const icon = readFileSync('public/favicon.svg', 'utf8')
-const html = `<title>Rugbyapp</title>
+const html = `<meta charset="utf-8">
+<title>Rugbyapp</title>
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(icon)}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Saira+Condensed:wght@700;800&display=swap">
 <style>${css.map(read).join('\n')}</style>

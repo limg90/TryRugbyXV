@@ -563,3 +563,39 @@ p { margin: 0; }
 .toast small { color: var(--muted); font-size: 0.82rem; }
 .toast-emoji { font-size: 2rem; line-height: 1; }
 .toast .icon-btn { margin-left: 0; }
+
+/* Signes de l'arbitre : illustrations noir et blanc, toujours sur fond papier clair. */
+.signe-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 0.85rem; }
+.signe-card { display: grid; grid-template-rows: auto 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; scroll-margin-top: 5rem; }
+.signe-figure-wrap { position: relative; background: #fbfbf8; border-bottom: 1px solid var(--line); }
+.signe-figure { position: relative; aspect-ratio: 21 / 23; display: grid; place-items: center; padding: 0.5rem; }
+.signe-figure img, .signe-figure .arbitre { width: 100%; height: 100%; object-fit: contain; }
+.signe-figure img { mix-blend-mode: multiply; }
+.signe-tag { position: absolute; top: 0.6rem; left: 0.6rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.15rem 0.5rem; border-radius: 999px; background: #fff; border: 1px dashed #8a948c; color: #56675c; }
+.signe-switch { position: absolute; bottom: 0.6rem; left: 50%; transform: translateX(-50%); display: inline-flex; background: #fff; border: 1px solid #c9d1c8; border-radius: 999px; padding: 2px; }
+.signe-switch button { white-space: nowrap; font: inherit; font-size: 0.78rem; font-weight: 600; border: 0; background: none; color: #56675c; padding: 0.3rem 0.7rem; border-radius: 999px; cursor: pointer; min-height: 30px; }
+.signe-switch button.is-on { background: #142019; color: #fff; }
+.signe-text { padding: 0.8rem 1rem 1rem; display: grid; gap: 0.5rem; align-content: start; }
+.signe-text h3 { font-family: var(--font-display); font-size: 1.35rem; margin: 0; }
+.signe-text dl { margin: 0; display: grid; gap: 0.25rem; }
+.signe-text dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.35rem; }
+.signe-text dd { margin: 0; font-size: 0.93rem; }
+
+.arbitre .arb-out { fill: none; stroke: #141414; stroke-linecap: round; stroke-linejoin: round; }
+.arbitre .arb-in { fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; }
+.arbitre .arb-ink { fill: #141414; stroke: #141414; stroke-linecap: round; }
+.arbitre .arb-skin, .arbitre .arb-shirt { fill: #fff; stroke: #141414; stroke-width: 2.4; stroke-linejoin: round; }
+.arbitre .arb-stripe { fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; }
+.arbitre .arb-shine { fill: none; stroke: #6b6b6b; stroke-width: 1.6; stroke-linecap: round; }
+.arbitre .arb-badge { fill: #fff; stroke: #141414; stroke-width: 1.4; }
+.arbitre .arb-cord { fill: none; stroke: #141414; stroke-width: 1.2; }
+.arbitre .arb-dot { fill: #141414; }
+.arbitre .arb-whistle { fill: #d9d9d9; stroke: #141414; stroke-width: 1.2; }
+.arbitre .arb-grass { fill: none; stroke: #141414; stroke-width: 1.2; stroke-linecap: round; }
+.arbitre .arb-prop { stroke: #141414; stroke-width: 1.6; }
+.arbitre .arb-ball { fill: #fff; stroke: #141414; stroke-width: 2; }
+.arbitre .arb-seam { fill: none; stroke: #141414; stroke-width: 1.2; }
+.arbitre .arb-ghost, .arbitre .arb-ghost-rect { fill: none; stroke: #141414; stroke-width: 1.6; stroke-dasharray: 4 3; }
+.arbitre .arb-motion { fill: none; stroke: #141414; stroke-width: 1.8; stroke-linecap: round; }
+.arbitre .arb-arrow { fill: none; stroke: #1d52c4; stroke-width: 2.4; stroke-linecap: round; }
+.arbitre .arb-arrowhead { fill: #1d52c4; }

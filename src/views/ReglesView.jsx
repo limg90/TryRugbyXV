@@ -6,8 +6,10 @@ import { href } from '../lib/router.js'
 import ScenarioPlayer from '../components/ScenarioPlayer.jsx'
 import Quiz from '../components/quiz/Quiz.jsx'
 import { Vignette } from './Bibliotheque.jsx'
+import SignesView from './SignesView.jsx'
 
-// Module Règles : #regles (liste Débutant / Expert), #regles-hors-jeu (fiche d'une règle).
+// Module Règles : #regles (liste Débutant / Expert), #regles-hors-jeu (fiche d'une règle),
+// #regles-signes (signes de l'arbitre).
 
 function Statut({ id }) {
   const { progression } = useApp()
@@ -32,6 +34,7 @@ function Liste() {
           <h1>Apprendre les règles</h1>
           <p className="lede">Chaque règle : une explication simple, un schéma animé, une vidéo et un quiz.</p>
         </div>
+        <a className="btn btn-ghost" href={href('regles', 'signes')}>Signes de l’arbitre →</a>
       </header>
       <div className="filters" role="radiogroup" aria-label="Module">
         {MODULES.map((x) => (
@@ -139,6 +142,7 @@ function Detail({ regle: r }) {
 }
 
 export default function ReglesView({ param }) {
+  if (param === 'signes') return <SignesView />
   const regle = param ? getRegle(param) : null
   if (param && !regle) {
     return (

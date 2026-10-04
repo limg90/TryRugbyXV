@@ -5,6 +5,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
+  // L'aperçu publié est une page unique : les images (signes de l'arbitre) y sont intégrées.
+  build: { assetsInlineLimit: process.env.VITE_PREVIEW ? 100_000 : 4096 },
   plugins: [
     react(),
     VitePWA({
@@ -29,7 +31,7 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2}'],
         // Polices Google mises en cache pour l'usage hors ligne.
         runtimeCaching: [
           {

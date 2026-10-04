@@ -51,4 +51,9 @@ src/
   Progression et badges dans `lib/progression.js`, enregistrés sur l'appareil (`rugbyapp.progression`).
   Routes `#regles`, `#regles-hors-jeu`, `#quiz`, `#quiz-niveau`, `#quiz-match`, `#quiz-match-defense`, `#quiz-progression`.
   `useScenario(scenario, { autoplay: true })` démarre la lecture seule.
+- **Signes de l'arbitre** (fait) : `data/signes.js` (20 signes en 5 catégories : geste, quand, et après),
+  route `#regles-signes`, lien depuis la page Règles. Illustrations fournies dans `src/assets/signes/*.webp` ;
+  les autres gestes sont dessinés par `components/Arbitre.jsx` (pose décrite par des angles de bras) et marqués
+  « Dessin provisoire ». Pour les remplacer : déposer `<id>.webp` dans `src/assets/signes/`, l'importer et
+  l'ajouter au signe (`image`). L'aperçu intègre les images (`assetsInlineLimit` quand `VITE_PREVIEW`).
 - **Assistant IA** : peut s'appuyer sur `POSITIONS` et `SCENARIOS` pour générer explication, animation et quiz.
