@@ -8,7 +8,7 @@ import ScenarioStage from '../components/ScenarioStage.jsx'
 export const niveauLabel = (id) => NIVEAUX.find((n) => n.id === id)?.label ?? id
 
 // Vignette : toutes les trajectoires de la combinaison, figées sur la dernière étape.
-function Vignette({ combinaison }) {
+export function Vignette({ combinaison }) {
   const frames = useMemo(() => buildFrames(combinaison), [combinaison])
   return (
     <div className="vignette" aria-hidden="true">

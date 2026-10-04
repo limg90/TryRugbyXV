@@ -43,6 +43,12 @@ src/
   (`ball: { carrier, team: 'adv' }`), le saut en touche (`lifted`) et trace les trajectoires (`Trails`).
   `Pitch` accepte `zoom: { x: [a, b], y: [c, d] }` pour la vue rapprochée. Les combinaisons de l'éditeur
   sont enregistrées dans le stockage local (`rugbyapp.combinaisons`).
-- **Règles, quiz et progression** : `PositionQuiz` est un QCM simple à remplacer par le moteur de quiz ;
-  le niveau (`lib/AppContext.jsx`) accueillera badges et scores.
+- **Règles, quiz et progression** (fait) : `data/regles.js` (modules Débutant et Expert, 20 règles avec
+  explication, schéma animé, emplacement vidéo et quiz), `data/quiz.js` (banque de 113 questions : QCM,
+  glisser-déposer, positionnement sur le terrain, choix tactique ; séries et quiz adapté au niveau),
+  `data/matchs.js` (mode match : 4 schémas, décisions notées et animées, choix de l'équipe).
+  Moteur de quiz dans `components/quiz/` (`Quiz` + un composant par type, `Decision` pour les choix tactiques).
+  Progression et badges dans `lib/progression.js`, enregistrés sur l'appareil (`rugbyapp.progression`).
+  Routes `#regles`, `#regles-hors-jeu`, `#quiz`, `#quiz-niveau`, `#quiz-match`, `#quiz-match-defense`, `#quiz-progression`.
+  `useScenario(scenario, { autoplay: true })` démarre la lecture seule.
 - **Assistant IA** : peut s'appuyer sur `POSITIONS` et `SCENARIOS` pour générer explication, animation et quiz.

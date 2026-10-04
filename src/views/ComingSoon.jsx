@@ -1,12 +1,4 @@
 const MODULES = {
-  regles: {
-    titre: 'Règles',
-    texte: 'Les modules Débutant et Expert : chaque règle avec une explication simple, un schéma animé, une vidéo et un quiz.',
-  },
-  quiz: {
-    titre: 'Quiz et match',
-    texte: 'Les quiz adaptés à votre niveau, le mode match à décisions et les badges de progression.',
-  },
   assistant: {
     titre: 'Assistant Rugby',
     texte: 'Posez une question (« Explique-moi le rôle du numéro 8 ») et recevez une explication, un schéma animé et un quiz.',

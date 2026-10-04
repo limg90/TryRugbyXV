@@ -67,10 +67,11 @@ export function buildFrames(scenario) {
   return frames
 }
 
-export function useScenario(scenario, { speed = 1 } = {}) {
+// autoplay : la lecture démarre seule à chaque nouveau scénario (quiz, mode match).
+export function useScenario(scenario, { speed = 1, autoplay = false } = {}) {
   const frames = useMemo(() => buildFrames(scenario), [scenario])
   const [rawIndex, setIndex] = useState(0)
-  const [playing, setPlaying] = useState(false)
+  const [playing, setPlaying] = useState(autoplay)
   const [current, setCurrent] = useState(scenario)
 
   // Nouveau scénario : on revient au début (ajustement pendant le rendu, sans effet).
@@ -78,7 +79,7 @@ export function useScenario(scenario, { speed = 1 } = {}) {
   if (current !== scenario) {
     setCurrent(scenario)
     setIndex(0)
-    setPlaying(false)
+    setPlaying(autoplay)
     index = 0
   }
   index = Math.min(index, frames.length - 1)

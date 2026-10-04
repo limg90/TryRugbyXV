@@ -5,6 +5,9 @@ import TerrainView from './views/TerrainView.jsx'
 import PostesView from './views/PostesView.jsx'
 import PosteDetail from './views/PosteDetail.jsx'
 import CombinaisonsView from './views/CombinaisonsView.jsx'
+import ReglesView from './views/ReglesView.jsx'
+import QuizView from './views/QuizView.jsx'
+import BadgeToast, { BadgeLink } from './components/BadgeToast.jsx'
 import ComingSoon, { SOON_MODULES } from './views/ComingSoon.jsx'
 
 const NAV = [
@@ -44,6 +47,8 @@ function Shell() {
   if (route.name === 'postes') view = <PostesView />
   else if (route.name === 'poste') view = <PosteDetail numero={route.param} />
   else if (route.name === 'combinaisons') view = <CombinaisonsView param={route.param} />
+  else if (route.name === 'regles') view = <ReglesView param={route.param} />
+  else if (route.name === 'quiz') view = <QuizView param={route.param} />
   else if (SOON_MODULES.includes(route.name)) view = <ComingSoon name={route.name} />
   else view = <TerrainView />
 
@@ -68,9 +73,11 @@ function Shell() {
             </a>
           ))}
         </nav>
+        <BadgeLink />
         <LevelPicker />
       </header>
       <main className="main">{view}</main>
+      <BadgeToast />
     </div>
   )
 }

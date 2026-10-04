@@ -1,7 +1,8 @@
 import Pitch from '../components/Pitch.jsx'
 import PlayerToken from '../components/PlayerToken.jsx'
 import SkillBars from '../components/SkillBars.jsx'
-import PositionQuiz from '../components/PositionQuiz.jsx'
+import Quiz from '../components/quiz/Quiz.jsx'
+import { questionsDePoste } from '../data/quiz.js'
 import { POSITIONS, GROUPES, getPosition } from '../data/positions.js'
 import { BASE_FORMATION } from '../data/scenarios.js'
 import { href } from '../lib/router.js'
@@ -93,7 +94,7 @@ export default function PosteDetail({ numero }) {
 
         <section className="fiche-block fiche-wide">
           <h2>Quiz : situations de match</h2>
-          <PositionQuiz key={p.numero} numero={p.numero} questions={p.quiz} />
+          <Quiz key={p.numero} questions={questionsDePoste(p.numero)} />
         </section>
       </div>
     </article>
