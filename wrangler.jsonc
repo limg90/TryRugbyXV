@@ -1,0 +1,9 @@
+// Déploiement Cloudflare (Workers, fichiers statiques) : publie le dossier dist/ produit par `npm run build`.
+{
+  "name": "tryrugbyxv",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
