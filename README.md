@@ -56,4 +56,10 @@ src/
   les autres gestes sont dessinés par `components/Arbitre.jsx` (pose décrite par des angles de bras) et marqués
   « Dessin provisoire ». Pour les remplacer : déposer `<id>.webp` dans `src/assets/signes/`, l'importer et
   l'ajouter au signe (`image`). L'aperçu intègre les images (`assetsInlineLimit` quand `VITE_PREVIEW`).
+- **Espace Coach et Espace Joueur** (fait) : `data/evaluation.js` (13 critères notés de 1 à 10 en 4 familles,
+  profils cibles des 15 postes pour un U18, abaissés de 1 ou 2 points selon le niveau, banque d'exercices
+  reliée aux règles, combinaisons et quiz). `lib/analyse.js` calcule écarts, points forts, axes, recommandations
+  et plan sur 4 semaines ; `lib/suivi.js` enregistre sur l'appareil (`rugbyapp.coach`, `rugbyapp.joueur`).
+  Graphiques dans `components/suivi/` (radar, courbe, jauges). Routes `#coach`, `#coach-nouveau`,
+  `#coach-<id>(-evaluer|-evolution|-profil)`, `#joueur(-evaluer|-plan|-objectifs|-historique)`.
 - **Assistant IA** : peut s'appuyer sur `POSITIONS` et `SCENARIOS` pour générer explication, animation et quiz.
