@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 // Routeur par ancre, compatible hors ligne et hébergement statique.
-// Routes : #terrain, #postes, #poste-9, #combinaisons, #regles, #quiz, #assistant
+// Routes : #terrain, #postes, #poste-9, #combinaisons, #regles, #quiz, #coach(-id), #joueur(-onglet), #assistant
 function parse(hash) {
   const h = (hash || '').replace(/^#\/?/, '')
   const [name, ...rest] = h.split('-')

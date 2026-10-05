@@ -7,6 +7,8 @@ import PosteDetail from './views/PosteDetail.jsx'
 import CombinaisonsView from './views/CombinaisonsView.jsx'
 import ReglesView from './views/ReglesView.jsx'
 import QuizView from './views/QuizView.jsx'
+import CoachView from './views/CoachView.jsx'
+import JoueurView from './views/JoueurView.jsx'
 import BadgeToast, { BadgeLink } from './components/BadgeToast.jsx'
 import ComingSoon, { SOON_MODULES } from './views/ComingSoon.jsx'
 
@@ -17,6 +19,8 @@ const NAV = [
   { name: 'regles', label: 'Règles', icon: 'M6 3h9l3 3v15H6z M9 10h6 M9 14h6 M9 18h4' },
   { name: 'arbitre', label: 'Arbitre', to: href('regles', 'signes'), icon: 'M7 14a5 5 0 1 0 5-5H8a2 2 0 0 0-2 2v3z M12 9V6h6 M18 4v4' },
   { name: 'quiz', label: 'Quiz', icon: 'M9 9a3 3 0 1 1 4 2.8c-.7.3-1 .9-1 1.6V15 M12 19h.01' },
+  { name: 'coach', label: 'Coach', icon: 'M9 3h6v3H9z M8 4.5H5V21h14V4.5h-3 M8.5 11h7 M8.5 15h7 M8.5 18.5h4' },
+  { name: 'joueur', label: 'Joueur', icon: 'M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M4.5 21c.8-4 3.7-6.3 7.5-6.3s6.7 2.3 7.5 6.3' },
   { name: 'assistant', label: 'Assistant', icon: 'M4 5h16v11H9l-5 4z' },
 ]
 
@@ -52,6 +56,8 @@ function Shell() {
   else if (route.name === 'combinaisons') view = <CombinaisonsView param={route.param} />
   else if (route.name === 'regles') view = <ReglesView param={route.param} />
   else if (route.name === 'quiz') view = <QuizView param={route.param} />
+  else if (route.name === 'coach') view = <CoachView param={route.param} />
+  else if (route.name === 'joueur') view = <JoueurView param={route.param} />
   else if (SOON_MODULES.includes(route.name)) view = <ComingSoon name={route.name} />
   else view = <TerrainView />
 
@@ -70,7 +76,7 @@ function Shell() {
         </a>
         <nav className="nav" aria-label="Modules">
           {NAV.map((n) => (
-            <a key={n.name} href={n.to ?? href(n.name)} className={active === n.name ? 'is-active' : ''} aria-current={active === n.name ? 'page' : undefined}>
+            <a key={n.name} href={n.to ?? href(n.name)} title={n.label} aria-label={n.label} className={active === n.name ? 'is-active' : ''} aria-current={active === n.name ? 'page' : undefined}>
               <Icon d={n.icon} />
               <span>{n.label}</span>
             </a>
