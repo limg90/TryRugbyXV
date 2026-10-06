@@ -62,4 +62,9 @@ src/
   et plan sur 4 semaines ; `lib/suivi.js` enregistre sur l'appareil (`rugbyapp.coach`, `rugbyapp.joueur`).
   Graphiques dans `components/suivi/` (radar, courbe, jauges). Routes `#coach`, `#coach-nouveau`,
   `#coach-<id>(-evaluer|-evolution|-profil)`, `#joueur(-evaluer|-plan|-objectifs|-historique)`.
-- **Assistant IA** : peut s'appuyer sur `POSITIONS` et `SCENARIOS` pour générer explication, animation et quiz.
+- **Assistant Rugby** (fait) : `lib/assistant.js` indexe les postes, règles, combinaisons et signes de l'arbitre,
+  découpe la question en mots normalisés (sans accents ni mots vides, synonymes, numéros de poste) et choisit la
+  fiche la plus proche. La réponse reprend son explication, son schéma animé (`ScenarioPlayer`) et 3 questions de quiz
+  (celles de la fiche, sinon les plus proches de la banque). Tout est calculé sur l'appareil : pas de clé, hors ligne.
+  Vue `views/AssistantView.jsx`, route `#assistant`. Pour enrichir les réponses : compléter `SYNONYMES`,
+  `ALIAS_POSTES` ou `EXEMPLES` dans `lib/assistant.js`.

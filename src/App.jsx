@@ -9,8 +9,8 @@ import ReglesView from './views/ReglesView.jsx'
 import QuizView from './views/QuizView.jsx'
 import CoachView from './views/CoachView.jsx'
 import JoueurView from './views/JoueurView.jsx'
+import AssistantView from './views/AssistantView.jsx'
 import BadgeToast, { BadgeLink } from './components/BadgeToast.jsx'
-import ComingSoon, { SOON_MODULES } from './views/ComingSoon.jsx'
 
 const NAV = [
   { name: 'terrain', label: 'Terrain', icon: 'M3 5h18v14H3z M12 5v14 M3 9h3v6H3 M21 9h-3v6h3' },
@@ -58,7 +58,7 @@ function Shell() {
   else if (route.name === 'quiz') view = <QuizView param={route.param} />
   else if (route.name === 'coach') view = <CoachView param={route.param} />
   else if (route.name === 'joueur') view = <JoueurView param={route.param} />
-  else if (SOON_MODULES.includes(route.name)) view = <ComingSoon name={route.name} />
+  else if (route.name === 'assistant') view = <AssistantView />
   else view = <TerrainView />
 
   return (
