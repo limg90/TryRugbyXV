@@ -2,6 +2,8 @@
 {
   "name": "tryrugbyxv",
   "compatibility_date": "2026-10-01",
+  // Construit l'app avant chaque publication, même si la commande de build n'est pas renseignée dans Cloudflare.
+  "build": { "command": "npm run build" },
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
