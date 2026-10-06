@@ -5,7 +5,7 @@ import Arbitre from '../components/Arbitre.jsx'
 
 // Signes de l'arbitre : #regles-signes. Illustrations fournies ou gestes dessinés (components/Arbitre.jsx).
 
-function Figure({ signe: s }) {
+export function Figure({ signe: s }) {
   const [officiel, setOfficiel] = useState(false)
   const dessin = !s.image || officiel
   return (
